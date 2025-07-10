@@ -13,8 +13,8 @@ class ApiController extends Controller
             $response = Http::get('https://jsonplaceholder.typicode.com/posts');
             
             if ($response->successful()) {
-                $posts = $response->json();
-                return array_slice($posts, 0, 10); 
+                $posts = collect($response->json())->take(10);
+                return $posts;
             }
             
             return [];
