@@ -15,7 +15,9 @@ class EmailLog extends Model
         'attachments',
         'type',
         'sent_at',
-        'error_message'
+        'error_message',
+        'emailable_id',
+        'emailable_type',
     ];
 
     protected $casts = [

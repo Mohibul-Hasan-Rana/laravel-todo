@@ -12,10 +12,10 @@ class TodoController extends Controller
 {
     protected $emailService;
 
-    // public function __construct(EmailService $emailService)
-    // {
-    //     $this->emailService = $emailService;
-    // }
+    public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
 
     public function index()
     {
@@ -60,6 +60,17 @@ class TodoController extends Controller
         
         return redirect()->route('todos.index')
                         ->with('success', 'Todo deleted successfully!');
+    }
+
+    public function complete(Todo $todo)
+    {
+        $todo->update(['completed' => true]);
+        
+        // Send completion notification
+        $this->emailService->sendCompletionNotification($todo);
+        
+        return redirect()->route('todos.index')
+                        ->with('success', 'Todo marked as completed!');
     }
     
 }
