@@ -50,10 +50,52 @@
         </div>
     @empty
         <div class="col-12">
-            <p class="text-center">No todos found. <a href="{{ route('todos.create') }}">Create your first todo!</a></p>
+            <div class="text-center py-5">
+                <div class="mb-3">
+                    <i class="fas fa-tasks fa-3x text-muted"></i>
+                </div>
+                <h4 class="text-muted">No todos found</h4>
+                <p class="text-muted">Get started by creating your first todo!</p>
+                <a href="{{ route('todos.create') }}" class="btn btn-primary">Create Todo</a>
+            </div>
         </div>
     @endforelse
 </div>
 
-{{ $todos->links() }}
+{{-- Better pagination with Bootstrap styling --}}
+@if($todos->hasPages())
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">
+                    Showing {{ $todos->firstItem() ?? 0 }} to {{ $todos->lastItem() ?? 0 }} of {{ $todos->total() }} results
+                </small>
+                @if($todos->hasPages())
+                    <small class="text-muted">
+                        Page {{ $todos->currentPage() }} of {{ $todos->lastPage() }}
+                    </small>
+                @endif
+            </div>
+            <div class="d-flex justify-content-center">
+                {{ $todos->onEachSide(1)->links('pagination::bootstrap-4') }}
+            </div>
+        </div>
+    </div>
+@endif
+
+<!-- {{-- Alternative: Custom pagination info --}}
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">
+                Showing {{ $todos->firstItem() ?? 0 }} to {{ $todos->lastItem() ?? 0 }} of {{ $todos->total() }} results
+            </small>
+            @if($todos->hasPages())
+                <small class="text-muted">
+                    Page {{ $todos->currentPage() }} of {{ $todos->lastPage() }}
+                </small>
+            @endif
+        </div>
+    </div>
+</div> -->
 @endsection
