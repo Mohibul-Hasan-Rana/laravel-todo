@@ -52,7 +52,6 @@ class EmailService
     {
         try {
             // Implementation for completion notification
-            // This is a placeholder - you can customize as needed
             
             $this->logEmail($todo, 'completion', 'sent');
             
@@ -63,15 +62,13 @@ class EmailService
 
     protected function generateCsv($posts)
     {
-        $csvData = "ID,Title,Body,User ID\n";
+        $csvData = "ID,Title\n";
         
         foreach ($posts as $post) {
             $csvData .= sprintf(
-                "%d,\"%s\",\"%s\",%d\n",
-                $post['id'],
-                str_replace('"', '""', $post['title']),
-                str_replace('"', '""', $post['body']),
-                $post['userId']
+            "%d,\"%s\"\n",
+            $post['id'],
+            str_replace('"', '""', $post['title'])
             );
         }
         

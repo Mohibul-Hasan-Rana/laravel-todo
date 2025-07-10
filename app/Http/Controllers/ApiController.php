@@ -10,11 +10,12 @@ class ApiController extends Controller
     public function fetchPosts()
     {
         try {
-            $response = Http::get('https://jsonplaceholder.typicode.com/posts');
-            
+            $response = Http::get('https://jsonplaceholder.typicode.com/posts', [
+                '_limit' => 10
+            ]);
+
             if ($response->successful()) {
-                $posts = collect($response->json())->take(10);
-                return $posts;
+                return $response->json();
             }
             
             return [];
