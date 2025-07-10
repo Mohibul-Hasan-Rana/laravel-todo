@@ -11,9 +11,11 @@
 
  6. Update database information in env file. 
 
- 7. Run migration file: ```php artisan migrate```
+ 7. Update email configuration in env file.
 
- 8. Run those command ```composer dumpautoload``` and ```php artisan config:cache```
+ 8. Run migration file: ```php artisan migrate```
+
+ 9. Run those command ```composer dumpautoload``` and ```php artisan config:cache```
 
  ## Usage 
 
